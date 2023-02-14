@@ -1,5 +1,5 @@
-insert into ramo_atividade (id, descricao) values (1, 'Distribuição de alimentos');
-insert into ramo_atividade (id, descricao) values (2, 'Telecomunicações');
+insert into ramo_atividade (id, descricao) values (1, "Distribuição de alimentos");
+insert into ramo_atividade (id, descricao) values (2, "Telecomunicações");
 insert into ramo_atividade (id, descricao) values (3, 'Vestuário');
 insert into ramo_atividade (id, descricao) values (4, 'Lavanderia');
 insert into ramo_atividade (id, descricao) values (5, 'Gráfica');
