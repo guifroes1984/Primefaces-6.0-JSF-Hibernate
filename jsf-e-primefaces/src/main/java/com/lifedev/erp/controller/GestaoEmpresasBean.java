@@ -9,24 +9,46 @@ import javax.inject.Named;
 
 import com.lifedev.erp.model.Empresa;
 import com.lifedev.erp.repository.Empresas;
+import com.lifedev.erp.util.FacesMessages;
 
 @Named
 @ViewScoped
 public class GestaoEmpresasBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private Empresas empresas;
 	
+	@Inject
+	private FacesMessages messages;
+
 	private List<Empresa> listaEmpresas;
+
+	private String termoPesquisa;
 	
+	public void pesquisar() {
+		listaEmpresas = empresas.pesquisar(termoPesquisa);
+		
+		if (listaEmpresas.isEmpty()) {
+			messages.info("Sua consulta não retornou registros!");
+		}
+	}
+
 	public void todasEmpresas() {
 		listaEmpresas = empresas.todas();
 	}
-	
+
 	public List<Empresa> getListaEmpresas() {
 		return listaEmpresas;
+	}
+
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
 	}
 
 }
