@@ -13,6 +13,7 @@ import com.lifedev.erp.model.RamoAtividade;
 import com.lifedev.erp.model.TipoEmpresa;
 import com.lifedev.erp.repository.Empresas;
 import com.lifedev.erp.repository.RamoAtividades;
+import com.lifedev.erp.service.CadastroEmpresaService;
 import com.lifedev.erp.util.FacesMessages;
 
 @Named
@@ -29,12 +30,31 @@ public class GestaoEmpresasBean implements Serializable {
 	
 	@Inject
 	private RamoAtividades ramoAtividades;
+	
+	@Inject
+	private CadastroEmpresaService cadastroEmpresaService;
 
 	private List<Empresa> listaEmpresas;
 
 	private String termoPesquisa;
 	
 	private Converter ramoAtividadeConverter;
+	
+	private Empresa empresa;
+	
+	public void prepararNovaEmpresa() {
+		empresa = new Empresa();
+	}
+	
+	public void salvar() {
+		cadastroEmpresaService.salvar(empresa);
+		
+		if (jaHouvePesquisa()) {
+			pesquisar();
+		}
+		
+		messages.info("Empresa cadastrada com sucesso!");
+	}
 	
 	public void pesquisar() {
 		listaEmpresas = empresas.pesquisar(termoPesquisa);
@@ -55,6 +75,10 @@ public class GestaoEmpresasBean implements Serializable {
 		
 		return listaRamoAtividades;
 	}
+	
+	private boolean jaHouvePesquisa() {
+		return termoPesquisa != null && !"".equals(termoPesquisa);
+	}
 
 	public List<Empresa> getListaEmpresas() {
 		return listaEmpresas;
@@ -74,6 +98,10 @@ public class GestaoEmpresasBean implements Serializable {
 	
 	public Converter getRamoAtividadeConverter() {
 		return ramoAtividadeConverter;
+	}
+	
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 
 }
