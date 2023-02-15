@@ -72,7 +72,7 @@
 		</p:dataTable>
 		
 		<p:dialog header="Nova empresa" widgetVar="empresaDialogWidgetVar"
-			modal="true" resizable="false" closeOnEscape="true">
+			modal="true" resizable="false" closeOnEscape="true" draggable="false">
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Razão social: " for="razaoSocial" />
 				<p:inputText id="razaoSocial" size="80" maxlength="120" />
@@ -95,7 +95,11 @@
 				<p:calendar id="dataFundacao" pattern="dd/MM/yyyy" size="30" />
 				
 				<p:outputLabel value="Ramo atividade: " for="ramoAtividade"/>
-				<p:autoComplete id="ramoAtividade" size="80" />
+				<p:autoComplete id="ramoAtividade" size="80" 
+					completeMethod="#{gestaoEmpresasBean.completarRamoAtividade}"
+					converter="#{gestaoEmpresasBean.ramoAtividadeConverter}"
+					var="ramoAtividade"
+					itemLabel="#{ramoAtividade.descricao}" itemValue="#{ramoAtividade}" />
 				
 				<h:outputLabel />
 				<p:commandButton value="Salvar" />
